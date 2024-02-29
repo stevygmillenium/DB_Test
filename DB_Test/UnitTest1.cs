@@ -10,15 +10,15 @@ namespace DB_Test
             string per = File.ReadAllText(@"..\..\..\json1.json");
             string addr = File.ReadAllText(@"..\..\..\XMLFile1.xml");
             var per_data = JsonSerializer.Deserialize<JsonObject>(per);
-            XmlDocument addr_data = new XmlDocument();
-            addr_data.LoadXml(addr);
-            for (int i = 0; i < addr_data.ChildNodes.Count; i++)
+            XmlDocument jdesc_data = new XmlDocument();
+            jdesc_data.LoadXml(addr);
+            for (int i = 0; i < jdesc_data.ChildNodes.Count; i++)
             {
                 person person = new person();
                 person.name = (string)per_data["person"][i]["name"];
                 person.email = (string)per_data["person"][i]["email"];
                 person.address =(string) per_data["person"][i]["address"];
-                XmlNode xmlNode = addr_data.SelectNodes("job_pos/job_desc").OfType<XmlElement>().ElementAt(i);
+                XmlNode xmlNode = jdesc_data.SelectNodes("job_pos/job_desc").OfType<XmlElement>().ElementAt(i);
                 person.job_Desc = new job_desc { job_title = xmlNode["job_title"].InnerText, sal_amt = (float)Convert.ToDouble(xmlNode["sal_amt"].InnerText) };                
                 people.Add(person);
             }
