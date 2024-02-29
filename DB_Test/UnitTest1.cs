@@ -8,10 +8,10 @@ namespace DB_Test
         {
             List<person> people = new List<person>();
             string per = File.ReadAllText(@"..\..\..\json1.json");
-            string addr = File.ReadAllText(@"..\..\..\XMLFile1.xml");
+            string jdesc = File.ReadAllText(@"..\..\..\XMLFile1.xml");
             var per_data = JsonSerializer.Deserialize<JsonObject>(per);
             XmlDocument jdesc_data = new XmlDocument();
-            jdesc_data.LoadXml(addr);
+            jdesc_data.LoadXml(jdesc);
             for (int i = 0; i < jdesc_data.ChildNodes.Count; i++)
             {
                 person person = new person();
